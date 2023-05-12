@@ -39,4 +39,4 @@ Once the program is launched, you can start managing your incomes and expenses u
 
 ## License
 
-This project is released under the [MIT License](https://chat.openai.com/LICENSE). Feel free to modify and distribute it as per the terms of the license.
+This project is released under the [MIT License](https://en.wikipedia.org/wiki/MIT_License). Feel free to modify and distribute it as per the terms of the license.
