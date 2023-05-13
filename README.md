@@ -1,6 +1,6 @@
 # Fiscal Management
 
-This Java project is developed for the OOP exam and serves as an application for managing people's incomes and expenses through a table-based interface. It provides various features such as adding, removing, and modifying individual entries. Additionally, the program allows users to filter data by date or search by description. It also supports exporting data to Excel, TXT, and CSV file formats. Users can save and load budgets in a file format specific to the program. Furthermore, the application includes an auto-save feature, ensuring that users can retrieve their budget even if they forget to save manually. Finally, printing functionality is also available.
+This Java project is developed for the OOP exam and serves as an application for managing people's incomes and expenses through a table-based interface.
 
 ## Features
 
