@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * A JPanel that displays a form for adding a transaction to a budget manager.
+ * A {@link TransactionPanelBase} that displays a form for adding a transaction to the budget.
  * The form contains text fields for description and amount, and a date spinner for the transaction date.
  * The panel also contains an "Add" button to submit the transaction, and a "Cancel" button to cancel the transaction.
  *

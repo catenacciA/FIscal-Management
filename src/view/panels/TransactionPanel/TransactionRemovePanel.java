@@ -10,7 +10,8 @@ import javax.swing.table.TableColumnModel;
 import java.awt.*;
 
 /**
- * {@link TransactionRemovePanel} is a {@link view.panels.TransactionPanel.TransactionPanelBase} that displays a table of transactions and provides
+ * {@link TransactionRemovePanel} is a {@link view.panels.TransactionPanel.TransactionPanelBase}
+ * that displays a table of transactions and provides
  * buttons to remove, clear, and close the panel.
  *
  * @author Alessandro Catenacci
