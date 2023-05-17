@@ -47,7 +47,7 @@ public class TransactionAddController implements ActionListener {
         this.transactionAddPanel = transactionAddPanel;
         this.budgetStatusPanel = budgetStatusPanel;
 
-        transactionAddPanel.getAddButton().addActionListener(this);
+        transactionAddPanel.getActionButton().addActionListener(this);
         transactionAddPanel.getCancelButton().addActionListener(this);
     }
 

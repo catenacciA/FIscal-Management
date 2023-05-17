@@ -37,7 +37,7 @@ public class TransactionRemoveController {
         this.tableModel = tableModel;
         this.statusPanel = statusPanel;
 
-        view.getRemoveButton().addActionListener(e -> {
+        view.getActionButton().addActionListener(e -> {
             try {
                 int row = view.getSelectedRow();
                 if (row == -1) {
@@ -106,7 +106,7 @@ public class TransactionRemoveController {
         });
 
 
-        view.getCloseButton().addActionListener(e -> disposeDialog(view));
+        view.getCancelButton().addActionListener(e -> disposeDialog(view));
     }
 
     /**

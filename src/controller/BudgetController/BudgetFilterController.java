@@ -83,7 +83,6 @@ public class BudgetFilterController {
      * Filters the transactions in the budget by the given date range.
      */
     private void filterByCustomDateRange() {
-
         String fromDateStr = filterPanel.getFromDate();
         String toDateStr = filterPanel.getToDate();
         LocalDateTime fromDate;
@@ -93,6 +92,13 @@ public class BudgetFilterController {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             fromDate = LocalDate.parse(fromDateStr, formatter).atStartOfDay();
             toDate = LocalDate.parse(toDateStr, formatter).atTime(LocalTime.MAX);
+
+            if (fromDate.isAfter(toDate)) {
+                JOptionPane.showMessageDialog(filterPanel, "Invalid date range. " +
+                                "'From' date cannot be after 'To' date.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         } catch (DateTimeParseException ex) {
             JOptionPane.showMessageDialog(filterPanel, "Invalid date format",
                     "Error", JOptionPane.ERROR_MESSAGE);
@@ -103,6 +109,7 @@ public class BudgetFilterController {
                 null, fromDate, toDate);
         budget.setTransactions(filteredTransactions);
     }
+
 
     /**
      * Filters the transactions in the budget by the given preset.

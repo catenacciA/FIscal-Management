@@ -40,9 +40,9 @@ public class AutoSaveThread extends Thread {
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
-        } else {
-            System.out.println("Temp file does not exist");
-        }
+        } //else {
+            // System.out.println("Temp file does not exist");
+        //}
     }
 
     private File getTempFile() {

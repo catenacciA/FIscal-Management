@@ -5,6 +5,7 @@ import model.Transaction;
 import view.components.BudgetTable;
 import view.panels.BudgetPanel.BudgetSearchPanel;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.Collections;
 import java.util.List;
@@ -58,18 +59,28 @@ public class BudgetSearchController {
 
         searchPanel.getSearchTextField().addActionListener(e -> {
             String searchText = searchPanel.getSearchTextField().getText();
-            Optional<List<Transaction>> optionalFilteredTransactions =
-                    Optional.ofNullable(budget.filterTransactions(budget.getTransactions(),
-                            searchText, null, null));
-            if (optionalFilteredTransactions.isPresent()) {
-                filteredTransactions = optionalFilteredTransactions.get();
-                currentTransactionIndex = 0;
-                moveToTransaction(currentTransactionIndex);
-            } else {
-                filteredTransactions = Collections.emptyList();
-                currentTransactionIndex = -1;
+            try {
+                if (searchText.trim().isEmpty()) {
+                    throw new IllegalArgumentException("Description cannot be empty or whitespace");
+                }
+
+                Optional<List<Transaction>> optionalFilteredTransactions =
+                        Optional.ofNullable(budget.filterTransactions(budget.getTransactions(),
+                                searchText, null, null));
+
+                if (optionalFilteredTransactions.isPresent()) {
+                    filteredTransactions = optionalFilteredTransactions.get();
+                    currentTransactionIndex = 0;
+                    moveToTransaction(currentTransactionIndex);
+                } else {
+                    filteredTransactions = Collections.emptyList();
+                    currentTransactionIndex = -1;
+                }
+            } catch (IllegalArgumentException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
+
 
         searchPanel.getUpButton().addActionListener(e -> {
             if (hasFilteredTransactions() && currentTransactionIndex > 0) {

@@ -13,19 +13,17 @@ import java.util.Date;
  *
  * @author Alessandro Catenacci
  */
-public class TransactionAddPanel extends JPanel {
+public class TransactionAddPanel extends TransactionPanelBase {
 
     private JTextField descriptionField;
     private JTextField amountField;
     private JSpinner dateSpinner;
-    private JButton addButton;
-    private JButton cancelButton;
 
     /**
-     * Constructs an TransactionAddPanel with a BorderLayout, and adds the form panel and button panel to it.
+     * Constructs a TransactionAddPanel with a BorderLayout, and adds the form panel and button panel to it.
      */
     public TransactionAddPanel() {
-        setLayout(new BorderLayout());
+        super("Add", "Cancel"); // Call the constructor of the superclass
         add(createFormPanel(), BorderLayout.CENTER);
         add(createButtonPanel(), BorderLayout.SOUTH);
     }
@@ -34,6 +32,7 @@ public class TransactionAddPanel extends JPanel {
      * Creates the form panel that contains the transaction description, amount, and date fields.
      * The panel has a GridLayout with 3 rows and 2 columns, and a 10-pixel gap between components.
      * The panel has a white background and a 10-pixel empty border.
+     *
      * @return the form panel that contains the transaction fields
      */
     private JPanel createFormPanel() {
@@ -62,24 +61,24 @@ public class TransactionAddPanel extends JPanel {
      * The "Add" button has a green background color, and the "Cancel" button has a red background color.
      * The "Add" button is set to fill the horizontal space of its column, and the
      * "Cancel" button is aligned to the right of its column.
+     *
      * @return the button panel that contains the "Add" and "Cancel" buttons
      */
     private JPanel createButtonPanel() {
         JPanel buttonPanel = new JPanel(new GridBagLayout());
         buttonPanel.setBorder(new EmptyBorder(0, 10, 10, 10));
-        addButton = new JButton("Add");
-        addButton.setForeground(Color.BLACK);
-        cancelButton = new JButton("Cancel");
-        cancelButton.setForeground(new Color(244, 67, 54));
         GridBagConstraints c = new GridBagConstraints();
-        c.gridx = 0; c.gridy = 0; c.weightx = 1;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 1;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(0, 0, 0, 5);
-        buttonPanel.add(addButton, c);
-        c.gridx = 1; c.weightx = 0;
+        buttonPanel.add(super.getActionButton(), c);
+        c.gridx = 1;
+        c.weightx = 0;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(0, 5, 0, 0);
-        buttonPanel.add(cancelButton, c);
+        buttonPanel.add(super.getCancelButton(), c);
         buttonPanel.setBackground(Color.WHITE);
 
         return buttonPanel;
@@ -97,12 +96,14 @@ public class TransactionAddPanel extends JPanel {
         return dateSpinner;
     }
 
-    public JButton getAddButton() {
-        return addButton;
+    @Override
+    public JButton getActionButton() {
+        return super.getActionButton();
     }
 
+    @Override
     public JButton getCancelButton() {
-        return cancelButton;
+        return super.getCancelButton();
     }
 
     public void clearForm() {

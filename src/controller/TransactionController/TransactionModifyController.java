@@ -47,15 +47,15 @@ public class TransactionModifyController {
         transactionModifyPanel.getTransactionComboBox().addActionListener(event -> {
             Object selectedItem = transactionModifyPanel.getTransactionComboBox().getSelectedItem();
             if (selectedItem != null) {
-                transactionModifyPanel.getSaveButton().setEnabled(true);
+                transactionModifyPanel.getActionButton().setEnabled(true);
                 populateFieldsWithTransaction((int) selectedItem);
             } else {
-                transactionModifyPanel.getSaveButton().setEnabled(false);
+                transactionModifyPanel.getActionButton().setEnabled(false);
                 clearFields();
             }
         });
 
-        transactionModifyPanel.getSaveButton().addActionListener(event -> {
+        transactionModifyPanel.getActionButton().addActionListener(event -> {
             Object selectedItem = transactionModifyPanel.getTransactionComboBox().getSelectedItem();
             if (selectedItem != null) {
                 try {
@@ -86,7 +86,8 @@ public class TransactionModifyController {
                             "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(transactionModifyPanel, SELECT_TRANSACTION_MSG, NO_TRANSACTION_SELECTED_MSG,
+                JOptionPane.showMessageDialog(transactionModifyPanel, SELECT_TRANSACTION_MSG,
+                        NO_TRANSACTION_SELECTED_MSG,
                         JOptionPane.INFORMATION_MESSAGE);
             }
         });
@@ -110,7 +111,7 @@ public class TransactionModifyController {
                     "You need to create at least one transaction before you can modify it.",
                     "No transactions", JOptionPane.INFORMATION_MESSAGE);
 
-            transactionModifyPanel.getSaveButton().setEnabled(false);
+            transactionModifyPanel.getActionButton().setEnabled(false);
             transactionModifyPanel.getTransactionComboBox().removeAllItems();
         } else {
             transactionModifyPanel.getTransactionComboBox().removeAllItems();
@@ -126,7 +127,7 @@ public class TransactionModifyController {
                     transactionModifyPanel.getTransactionComboBox().setSelectedIndex(0);
                     populateFieldsWithTransaction((int) transactionModifyPanel.getTransactionComboBox().getSelectedItem());
                 }
-                transactionModifyPanel.getSaveButton().setEnabled(true);
+                transactionModifyPanel.getActionButton().setEnabled(true);
             }
         }
     }

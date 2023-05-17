@@ -4,12 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * A {@code TransactionModifyPanel} class that extends {@link javax.swing.JPanel}.
+ * A {@code TransactionModifyPanel} class that extends {@link view.panels.TransactionPanel.TransactionPanelBase}.
  * This panel provides UI components for modifying transaction data.
  *
  * @author Alessandro Catenacci
  */
-public class TransactionModifyPanel extends JPanel {
+public class TransactionModifyPanel extends TransactionPanelBase {
     private JLabel selectTransactionLabel;
     private JComboBox<Integer> transactionComboBox;
     private JLabel amountLabel;
@@ -18,8 +18,6 @@ public class TransactionModifyPanel extends JPanel {
     private JTextField dateTextField;
     private JLabel descriptionLabel;
     private JTextField descriptionTextField;
-    private JButton saveButton;
-    private JButton cancelButton;
 
     /**
      * Constructs a new {@code TransactionModifyPanel} with default UI components and layout.
@@ -27,6 +25,7 @@ public class TransactionModifyPanel extends JPanel {
      * description label and text field, save and cancel buttons.
      */
     public TransactionModifyPanel() {
+        super("Save", "Cancel");
         setLayout(new GridLayout(5, 2));
 
         selectTransactionLabel = new JLabel("Select transaction:");
@@ -37,10 +36,6 @@ public class TransactionModifyPanel extends JPanel {
         dateTextField = new JTextField();
         descriptionLabel = new JLabel("Description:");
         descriptionTextField = new JTextField();
-        saveButton = new JButton("Save");
-        saveButton.setForeground(Color.BLACK);
-        cancelButton = new JButton("Cancel");
-        cancelButton.setForeground(Color.RED);
 
         add(selectTransactionLabel);
         add(transactionComboBox);
@@ -50,8 +45,8 @@ public class TransactionModifyPanel extends JPanel {
         add(dateTextField);
         add(descriptionLabel);
         add(descriptionTextField);
-        add(saveButton);
-        add(cancelButton);
+        add(super.getActionButton());
+        add(super.getCancelButton());
     }
 
     public JComboBox<Integer> getTransactionComboBox() {
@@ -70,11 +65,13 @@ public class TransactionModifyPanel extends JPanel {
         return descriptionTextField;
     }
 
-    public JButton getSaveButton() {
-        return saveButton;
+    @Override
+    public JButton getActionButton() {
+        return super.getActionButton();
     }
 
+    @Override
     public JButton getCancelButton() {
-        return cancelButton;
+        return super.getCancelButton();
     }
 }

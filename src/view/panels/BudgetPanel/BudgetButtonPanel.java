@@ -115,7 +115,7 @@ public class BudgetButtonPanel extends JToolBar {
         dialog.setLocationRelativeTo(frame);
 
         // Set the default button on the root pane
-        dialog.getRootPane().setDefaultButton(transactionAddPanel.getAddButton());
+        dialog.getRootPane().setDefaultButton(transactionAddPanel.getActionButton());
 
         return dialog;
     }
@@ -137,7 +137,7 @@ public class BudgetButtonPanel extends JToolBar {
         dialog.setLocationRelativeTo(frame);
 
         // Set the default button on the root pane
-        dialog.getRootPane().setDefaultButton(modifyTransactionPanel.getSaveButton());
+        dialog.getRootPane().setDefaultButton(modifyTransactionPanel.getActionButton());
 
         return dialog;
     }
@@ -159,7 +159,7 @@ public class BudgetButtonPanel extends JToolBar {
         dialog.setLocationRelativeTo(frame);
 
         // Set the default button on the root pane
-        dialog.getRootPane().setDefaultButton(transactionRemovePanel.getRemoveButton());
+        dialog.getRootPane().setDefaultButton(transactionRemovePanel.getActionButton());
 
         return dialog;
     }
