@@ -29,6 +29,13 @@ chmod +x run_unix.sh
 ```
 
 ### Windows
+#### Option 1: Double-click
+
+1. In the project directory, locate the "run_win.bat" file.
+2. Double-click the "run_win.bat" file to execute it. This batch file performs similar actions to the "run_unix.sh" script.
+> Note: If the program doesn't launch, or you encounter any issues, refer to Option 2 below.
+
+#### Option 2: Command Prompt
 
 1.  Open the command prompt (`cmd.exe`) and navigate to the project directory.
 2.  Run the "run_win.bat" batch file. This batch file performs similar actions to the "run_unix.sh" script.
@@ -36,6 +43,10 @@ chmod +x run_unix.sh
 run_win.bat
 ```
 Once the program is launched, you can start managing your incomes and expenses using the provided features. Remember to save your budget regularly, or rely on the auto-save feature to ensure data persistence. For detailed instructions on using the program's interface, refer to the generated documentation located in the "docs" directory.
+
+## Documentation
+
+The documentation for this project is automatically generated when running the program. The documentation file is located in the `docs` directory, specifically the `index.html` file. To access the documentation, open the `index.html` file in a common web browser application.
 
 ## License
 
