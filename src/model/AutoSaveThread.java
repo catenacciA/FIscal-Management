@@ -28,21 +28,6 @@ public class AutoSaveThread extends Thread {
         this.budget = budget;
         this.lock = new ReentrantLock();
         this.tempFile = getTempFile();
-
-        // Debug statement to check if temp file exists and what's inside
-        if (tempFile.exists()) {
-            try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(tempFile))) {
-                Object object = inputStream.readObject();
-                // if (object instanceof Budget retrievedBudget) {
-                //     // Debug statement to print what was retrieved from temp file
-                //     // System.out.println("Retrieved budget from temp file: " + retrievedBudget);
-                // }
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        } //else {
-            // System.out.println("Temp file does not exist");
-        //}
     }
 
     private File getTempFile() {
@@ -64,14 +49,13 @@ public class AutoSaveThread extends Thread {
                 saveBudgetToTempFile();
 
                 // Debug statement to print what was saved to temp file
-                // System.out.println("Saved to temp file: " + budget.getTransactions());
+                //System.out.println("Saved to temp file: " + budget.getTransactions());
 
                 Thread.sleep(AUTO_SAVE_INTERVAL);
             } catch (InterruptedException e) {
                 interrupted = true;
                 Thread.currentThread().interrupt();
             } catch (IOException e) {
-                // Use a logging framework instead of printStackTrace()
                 e.printStackTrace();
             } finally {
                 lock.unlock();
@@ -106,23 +90,23 @@ public class AutoSaveThread extends Thread {
             return null;
         }
 
-        int result = JOptionPane.showConfirmDialog(null,
-                "A temporary file has been found.\n" +
-                        "Do you want to retrieve the budget from it?",
-                "Retrieve Budget", JOptionPane.YES_NO_OPTION);
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(tempFile))) {
+            Object object = inputStream.readObject();
+            if (object instanceof Budget retrievedBudget && !retrievedBudget.getTransactions().isEmpty()) {
+                int result = JOptionPane.showConfirmDialog(null,
+                        "A temporary file has been found.\n" +
+                                "Do you want to retrieve the budget from it?",
+                        "Retrieve Budget", JOptionPane.YES_NO_OPTION);
 
-        if (result == JOptionPane.YES_OPTION) {
-            try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(tempFile))) {
-                Object object = inputStream.readObject();
-                if (object instanceof Budget retrievedBudget) {
+                if (result == JOptionPane.YES_OPTION) {
                     // Debug statement to print what was retrieved from temp file
                     //System.out.println("Retrieved from temp file: " + retrievedBudget.getTransactions());
                     return retrievedBudget;
                 }
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
             }
-        } else {
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
             if (!tempFile.delete()) {
                 System.out.println("Failed to delete temp file");
             }
