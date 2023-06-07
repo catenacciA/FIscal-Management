@@ -31,26 +31,65 @@ public class TransactionAddPanel extends TransactionPanelBase {
 
     /**
      * Creates the form panel that contains the transaction description, amount, and date fields.
-     * The panel has a GridLayout with 3 rows and 2 columns, and a 10-pixel gap between components.
+     * The panel has a GridBagLayout with 3 rows and 2 columns, and a 10-pixel gap between components.
      * The panel has a white background and a 10-pixel empty border.
      *
      * @return the form panel that contains the transaction fields
      */
     private JPanel createFormPanel() {
-        JPanel formPanel = new JPanel(new GridLayout(3, 2, 10, 10));
+        JPanel formPanel = new JPanel(new GridBagLayout());
         formPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-        formPanel.setBackground(Color.WHITE);
+        formPanel.setBackground(new Color(240, 240, 240));
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 0;
+        c.anchor = GridBagConstraints.LINE_END;
+        c.insets = new Insets(0, 0, 10, 10);
+        formPanel.add(new JLabel("Description:"), c);
+        c.gridx = 1;
+        c.weightx = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(0, 0, 10, 0);
         descriptionField = new JTextField();
+        descriptionField.setFont(new Font("Arial", Font.PLAIN, 14));
+        descriptionField.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
+                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        formPanel.add(descriptionField, c);
+        c.gridx = 0;
+        c.gridy = 1;
+        c.weightx = 0;
+        c.fill = GridBagConstraints.NONE;
+        c.insets = new Insets(0, 0, 10, 10);
+        formPanel.add(new JLabel("Amount:"), c);
+        c.gridx = 1;
+        c.weightx = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(0, 0, 10, 0);
         amountField = new JTextField();
+        amountField.setFont(new Font("Arial", Font.PLAIN, 14));
+        amountField.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
+                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        formPanel.add(amountField, c);
+        c.gridx = 0;
+        c.gridy = 2;
+        c.weightx = 0;
+        c.fill = GridBagConstraints.NONE;
+        c.insets = new Insets(0, 0, 0, 10);
+        formPanel.add(new JLabel("Date:"), c);
+        c.gridx = 1;
+        c.weightx = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(0, 0, 0, 0);
         dateSpinner = new JSpinner(new SpinnerDateModel(new Date(), null, null, Calendar.MINUTE));
         JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(dateSpinner, "dd/MM/yyyy HH:mm:ss");
         dateSpinner.setEditor(dateEditor);
-        formPanel.add(new JLabel("Description:"));
-        formPanel.add(descriptionField);
-        formPanel.add(new JLabel("Amount:"));
-        formPanel.add(amountField);
-        formPanel.add(new JLabel("Date:"));
-        formPanel.add(dateSpinner);
+        dateSpinner.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
+                BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        formPanel.add(dateSpinner, c);
 
         return formPanel;
     }
@@ -80,7 +119,7 @@ public class TransactionAddPanel extends TransactionPanelBase {
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(0, 5, 0, 0);
         buttonPanel.add(super.getCancelButton(), c);
-        buttonPanel.setBackground(Color.WHITE);
+        buttonPanel.setBackground(new Color(240, 240, 240));
 
         return buttonPanel;
     }
