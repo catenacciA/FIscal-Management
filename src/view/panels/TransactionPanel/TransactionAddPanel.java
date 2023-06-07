@@ -24,6 +24,7 @@ public class TransactionAddPanel extends TransactionPanelBase {
      */
     public TransactionAddPanel() {
         super("Add", "Cancel"); // Call the constructor of the superclass
+        setLayout(new BorderLayout()); // Set the layout to BorderLayout
         add(createFormPanel(), BorderLayout.CENTER);
         add(createButtonPanel(), BorderLayout.SOUTH);
     }
@@ -66,7 +67,7 @@ public class TransactionAddPanel extends TransactionPanelBase {
      */
     private JPanel createButtonPanel() {
         JPanel buttonPanel = new JPanel(new GridBagLayout());
-        buttonPanel.setBorder(new EmptyBorder(0, 10, 10, 10));
+        buttonPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = 0;
