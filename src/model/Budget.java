@@ -3,15 +3,12 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 /**
  * A class that represents a budget and all its transactions.
- * The transactions are stored in a copy-on-write list to ensure
- * thread-safety when multiple threads access the budget simultaneously.
- * A concurrent hash map is used to keep track of the transaction indices.
+ * The transactions are stored in an ArrayList.
+ * A thread-safe hash map is used to keep track of the transaction indices.
  *
  * @author Alessandro Catenacci
  */
@@ -23,8 +20,8 @@ public class Budget implements Serializable {
      * Creates an empty Budget.
      */
     public Budget() {
-        transactions = new CopyOnWriteArrayList<>();
-        indices = new ConcurrentHashMap<>();
+        transactions = new ArrayList<>();
+        indices = Collections.synchronizedMap(new HashMap<>());
     }
 
     /**
