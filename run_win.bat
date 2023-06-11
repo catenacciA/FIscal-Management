@@ -8,12 +8,17 @@ set doc_dir=docs
 echo Compiling Java files...
 
 set javac_path=
-where /r "C:\Program Files";"C:\Program Files (x86)" javac.exe >nul 2>&1 && set javac_path=%errorlevel%
-if not defined javac_path (
+where /r "C:\Program Files" javac.exe >nul 2>&1 && (
+    set javac_path=javac.exe
+) || (
     echo javac not found. Searching the entire file system. This may take a while depending on the file system size.
     for /f "delims=" %%i in ('where /r \ javac.exe') do (
-        set javac_path=%%i
-        goto :found_javac
+  set javac_path=%%i
+  goto :found_javac
+    )
+    ) || (
+        echo ERROR: javac not found.
+        exit /b 1
     )
 )
 :found_javac
@@ -38,12 +43,13 @@ xcopy /s /y "%src_dir%\resources\*" "%out_dir%\resources\"
 echo Generating documentation...
 
 set javadoc_path=
-where /r "C:\Program Files";"C:\Program Files (x86)" javadoc.exe >nul 2>&1 && set javadoc_path=%errorlevel%
-if not defined javadoc_path (
+where /r "C:\Program Files" javadoc.exe >nul 2>&1 && (
+    set javadoc_path=javadoc.exe
+) || (
     echo javadoc not found. Searching the entire file system. This may take a while depending on the file system size.
     for /f "delims=" %%i in ('where /r \ javadoc.exe') do (
-        set javadoc_path=%%i
-        goto :found_javadoc
+  set javadoc_path=%%i
+  goto :found_javadoc
     )
 )
 :found_javadoc
@@ -57,12 +63,17 @@ if defined javadoc_path (
 echo Running Java application...
 
 set java_path=
-where /r "C:\Program Files";"C:\Program Files (x86)" java.exe >nul 2>&1 && set java_path=%errorlevel%
-if not defined java_path (
+where /r "C:\Program Files" java.exe >nul 2>&1 && (
+    set java_path=java.exe
+) || (
     echo java not found. Searching the entire file system. This may take a while depending on the file system size.
     for /f "delims=" %%i in ('where /r \ java.exe') do (
-        set java_path=%%i
-        goto :found_java
+  set java_path=%%i
+  goto :found_java
+      )
+    ) || (
+        echo ERROR: java not found.
+        exit /b 1
     )
 )
 :found_java
@@ -80,4 +91,5 @@ if %errorlevel% equ 0 (
     echo Execution failed.
     exit /b 1
 )
+
 pause
