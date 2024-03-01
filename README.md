@@ -47,7 +47,3 @@ Once the program is launched, you can start managing your incomes and expenses u
 ## Documentation
 
 The documentation for this project is automatically generated when running the program. The documentation file is located in the `docs` directory, specifically the `index.html` file. To access the documentation, open the `index.html` file in a common web browser application.
-
-## License
-
-This project is released under the [MIT License](https://en.wikipedia.org/wiki/MIT_License). Feel free to modify and distribute it as per the terms of the license.
